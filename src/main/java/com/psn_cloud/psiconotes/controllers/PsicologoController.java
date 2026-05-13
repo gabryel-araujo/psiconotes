@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -37,8 +38,9 @@ public class PsicologoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Psicologo> editarPsicologo(@Valid @RequestBody @PathVariable(name = "id") UUID id, PsicologoRecordDto psicologoRecordDto){
-        Psicologo psicologo = new Psicologo();
+    public ResponseEntity<Psicologo> editarPsicologo(@PathVariable(name = "id") UUID id,@Valid @RequestBody PsicologoRecordDto psicologoRecordDto){
+        Optional<Psicologo> optionalPsicologo = psicologoRepository.findById(id);
+        Psicologo psicologo = optionalPsicologo.get();
         BeanUtils.copyProperties(psicologoRecordDto, psicologo);
         return ResponseEntity.status(HttpStatus.OK).body(psicologoService.atualizar(id,psicologo));
     }
