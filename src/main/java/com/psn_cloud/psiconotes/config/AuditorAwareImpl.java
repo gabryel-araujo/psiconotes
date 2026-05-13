@@ -14,7 +14,7 @@ public class AuditorAwareImpl implements AuditorAware<UUID> {
     @Override
     public Optional<UUID> getCurrentAuditor() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated()) {
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getName())) {
             return Optional.empty();
         }
         // Adapte conforme seu UserDetails

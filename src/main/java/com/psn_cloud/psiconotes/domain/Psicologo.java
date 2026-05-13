@@ -46,5 +46,5 @@ public class Psicologo extends ClasseAuditavel{
     private String email;
 
     @Column(nullable = false)
-    private boolean ativo = true;
+    private Boolean ativo = true;
 }

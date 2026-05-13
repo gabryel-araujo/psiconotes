@@ -17,7 +17,7 @@ import java.util.UUID;
 public class Paciente extends ClasseAuditavel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
     private UUID id;
 
