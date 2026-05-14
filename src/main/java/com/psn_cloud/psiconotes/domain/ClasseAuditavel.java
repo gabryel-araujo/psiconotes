@@ -32,7 +32,7 @@ public abstract class ClasseAuditavel implements Serializable {
 
     @LastModifiedBy
     @Column(name = "atualizado_por")
-    private LocalDateTime atualizadoPor;
+    private UUID atualizadoPor;
 
     @LastModifiedDate
     @Column(name = "atualizado_em")

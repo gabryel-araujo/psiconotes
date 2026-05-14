@@ -1,0 +1,43 @@
+CREATE TABLE paciente (
+    id UUID NOT NULL,
+    criado_por UUID,
+    criado_em TIMESTAMP WITHOUT TIME ZONE,
+    atualizado_por UUID,
+    atualizado_em TIMESTAMP WITHOUT TIME ZONE,
+    nome VARCHAR(255) NOT NULL,
+    nacional_id VARCHAR(14) NOT NULL,
+    data_nascimento DATE,
+    telefone VARCHAR(30) NOT NULL,
+    email VARCHAR(120),
+    contato_emergencia VARCHAR(30),
+    observacoes VARCHAR(255),
+    convenio VARCHAR(1),
+    responsavel_legal VARCHAR(255),
+    profissao VARCHAR(120),
+    estado_civil VARCHAR(120),
+    ativo BOOLEAN NOT NULL,
+    CONSTRAINT paciente_pkey PRIMARY KEY (id),
+    CONSTRAINT uk_paciente_nacional_id UNIQUE (nacional_id),
+    CONSTRAINT uk_paciente_email UNIQUE (email)
+);
+
+CREATE TABLE psicologo (
+    id UUID NOT NULL,
+    criado_por UUID,
+    criado_em TIMESTAMP WITHOUT TIME ZONE,
+    atualizado_por UUID,
+    atualizado_em TIMESTAMP WITHOUT TIME ZONE,
+    nome VARCHAR(255) NOT NULL,
+    nacional_id VARCHAR(14) NOT NULL,
+    crp VARCHAR(7) NOT NULL,
+    especialidade VARCHAR(100),
+    abordagem VARCHAR(100),
+    data_nascimento DATE,
+    telefone VARCHAR(30) NOT NULL,
+    email VARCHAR(120),
+    ativo BOOLEAN NOT NULL,
+    CONSTRAINT psicologo_pkey PRIMARY KEY (id),
+    CONSTRAINT uk_psicologo_nacional_id UNIQUE (nacional_id),
+    CONSTRAINT uk_psicologo_crp UNIQUE (crp),
+    CONSTRAINT uk_psicologo_email UNIQUE (email)
+);
