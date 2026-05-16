@@ -8,18 +8,14 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.psn_cloud.psiconotes.config.ApplicationContextProvider;
-
 @Component
 public class SchemaMultiTenantConnectionProvider implements MultiTenantConnectionProvider<String> {
 
+    @Autowired
     private DataSource dataSource;
 
     @Override
     public Connection getAnyConnection() throws SQLException {
-        if (dataSource == null) {
-            dataSource = ApplicationContextProvider.getApplicationContext().getBean(DataSource.class);
-        }
         return dataSource.getConnection();
     }
 
