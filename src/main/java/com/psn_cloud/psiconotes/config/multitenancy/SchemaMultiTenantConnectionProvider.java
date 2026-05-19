@@ -27,7 +27,6 @@ public class SchemaMultiTenantConnectionProvider implements MultiTenantConnectio
     @Override
     public Connection getConnection(String tenantIdentifier) throws SQLException {
         Connection connection = getAnyConnection();
-        // Evitar SQL injection. Assumimos que o tenantIdentifier é validado e seguro.
         connection.createStatement().execute("SET search_path TO " + tenantIdentifier);
         return connection;
     }

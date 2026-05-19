@@ -17,8 +17,11 @@ import java.time.ZoneOffset;
 public class JwtService {
 
     // Em producao, isso deveria vir de variaveis de ambiente
-    @Value("${api.security.token.secret:my-secret-key-psiconotes}")
+    @Value("${jwt.secret}")
     private String secret;
+
+    @Value("${jwt.expiration}")
+    private Long expiration;
 
     public String generateToken(OrganizacaoUsuario usuario, String tenantId) {
         try {
@@ -49,6 +52,7 @@ public class JwtService {
     }
 
     private Instant genExpirationDate() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        return Instant.now().plusSeconds(expiration);
     }
+
 }
