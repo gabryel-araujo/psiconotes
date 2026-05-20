@@ -2,7 +2,6 @@ package com.psn_cloud.psiconotes.controllers;
 
 import com.psn_cloud.psiconotes.domain.Paciente;
 import com.psn_cloud.psiconotes.dtos.PacienteRecordDto;
-import com.psn_cloud.psiconotes.repositories.PacienteRepository;
 import com.psn_cloud.psiconotes.services.pacienteService.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -13,7 +12,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
