@@ -84,6 +84,8 @@ public class ConsultaService {
             throw new RegraDeNegocioException("O psicólogo está ocupado no horário selecionado");
         }
 
+        //TODO: FALTA IMPLEMENTAR A LOGICA PARA VERIFICAR A DISPONIBILIDADE DO PSICOLOGO
+
         consulta.setStatus(StatusConsulta.AGENDADA);
         return consultaRepository.save(consulta);
     }
