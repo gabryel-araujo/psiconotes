@@ -28,11 +28,13 @@ public class DisponibilidadeController {
         return ResponseEntity.status(HttpStatus.OK).body(disponibilidadeService.listarTodos());
     }
 
+    @PreAuthorize("hasAnyRole('PSICOLOGO','DEV', 'SECRETARIO')")
     @GetMapping("/{id}")
     public ResponseEntity<Disponibilidade> listarDisponibilidade(@PathVariable(name = "id") UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(disponibilidadeService.buscarPorId(id));
     }
 
+    @PreAuthorize("hasAnyRole('PSICOLOGO','DEV')")
     @PostMapping
     public ResponseEntity<Disponibilidade> cadastrarDisponibilidade(@Valid @RequestBody DisponibilidadeDto disponibilidadeDto){
         Disponibilidade disponibilidade = new Disponibilidade();
@@ -40,6 +42,7 @@ public class DisponibilidadeController {
         return ResponseEntity.status(HttpStatus.OK).body(disponibilidadeService.criar(disponibilidade));
     }
 
+    @PreAuthorize("hasAnyRole('PSICOLOGO','DEV')")
     @PutMapping("/{id}")
     public ResponseEntity<Disponibilidade> editarDisponibilidade(@Valid @RequestBody DisponibilidadeDto disponibilidadeDto, @PathVariable(name = "id") UUID id){
         Disponibilidade disponibilidade = new Disponibilidade();
