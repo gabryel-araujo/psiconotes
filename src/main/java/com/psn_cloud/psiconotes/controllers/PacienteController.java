@@ -1,7 +1,7 @@
 package com.psn_cloud.psiconotes.controllers;
 
 import com.psn_cloud.psiconotes.domain.Paciente;
-import com.psn_cloud.psiconotes.dtos.PacienteRecordDto;
+import com.psn_cloud.psiconotes.dtos.PacienteDto;
 import com.psn_cloud.psiconotes.services.pacienteService.PacienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -29,7 +29,7 @@ public class PacienteController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'PSICOLOGO', 'SECRETARIO')")
-    public ResponseEntity<Paciente> addPaciente(@RequestBody PacienteRecordDto pacientedto){
+    public ResponseEntity<Paciente> addPaciente(@RequestBody PacienteDto pacientedto){
         Paciente paciente = new Paciente();
         BeanUtils.copyProperties(pacientedto, paciente);
         return ResponseEntity.status(HttpStatus.OK).body(pacienteService.criar(paciente));
@@ -37,7 +37,7 @@ public class PacienteController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('DEV', 'ADMIN', 'PSICOLOGO', 'SECRETARIO')")
-    public ResponseEntity<Paciente> updatePaciente(@PathVariable(name = "id") UUID id, @Valid @RequestBody PacienteRecordDto paciente){
+    public ResponseEntity<Paciente> updatePaciente(@PathVariable(name = "id") UUID id, @Valid @RequestBody PacienteDto paciente){
         Paciente pacienteExistente = pacienteService.buscarPorId(id);
         BeanUtils.copyProperties(paciente, pacienteExistente);
         return ResponseEntity.status(HttpStatus.OK).body(pacienteService.atualizar(id, pacienteExistente));

@@ -1,7 +1,7 @@
 package com.psn_cloud.psiconotes.controllers;
 
 import com.psn_cloud.psiconotes.domain.Psicologo;
-import com.psn_cloud.psiconotes.dtos.PsicologoRecordDto;
+import com.psn_cloud.psiconotes.dtos.PsicologoDto;
 import com.psn_cloud.psiconotes.services.psicologoService.PsicologoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -29,17 +29,17 @@ public class PsicologoController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','DEV')")
-    public ResponseEntity<Psicologo> cadastrarPsicologo(@Valid @RequestBody PsicologoRecordDto psicologoRecordDto){
+    public ResponseEntity<Psicologo> cadastrarPsicologo(@Valid @RequestBody PsicologoDto psicologoDto){
         Psicologo psicologo = new Psicologo();
-        BeanUtils.copyProperties(psicologoRecordDto,psicologo);
+        BeanUtils.copyProperties(psicologoDto,psicologo);
         return ResponseEntity.status(HttpStatus.OK).body(psicologoService.criar(psicologo));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'PSICOLOGO','DEV')")
-    public ResponseEntity<Psicologo> editarPsicologo(@PathVariable(name = "id") UUID id, @Valid @RequestBody PsicologoRecordDto psicologoRecordDto){
+    public ResponseEntity<Psicologo> editarPsicologo(@PathVariable(name = "id") UUID id, @Valid @RequestBody PsicologoDto psicologoDto){
         Psicologo psicologoExistente = psicologoService.buscarPorId(id);
-        BeanUtils.copyProperties(psicologoRecordDto, psicologoExistente);
+        BeanUtils.copyProperties(psicologoDto, psicologoExistente);
         return ResponseEntity.status(HttpStatus.OK).body(psicologoService.atualizar(id, psicologoExistente));
     }
 }

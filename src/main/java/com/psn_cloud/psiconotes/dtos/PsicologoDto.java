@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record PsicologoRecordDto(
+public record PsicologoDto(
         @NotBlank(message = "O campo nome não pode ser vazio") String nome,
         @NotBlank(message = "O CPF/CNPJ precisa ser preenchido")String nacionalId,
         @NotBlank(message = "O CRP deve ser preenchido") String crp,
