@@ -52,6 +52,7 @@ class ConsultaServiceTest {
 
     @Test
     void cadastrarConsulta() {
+
     }
 
     @Test
